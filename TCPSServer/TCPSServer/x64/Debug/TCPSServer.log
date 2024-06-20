@@ -1,3 +1,3 @@
 ﻿  Main.cpp
-C:\Users\shenw\Documents\Projects\TCPServer\TCPSServer\Main.cpp(9,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\shenw\Documents\Projects\TCPServer\TCPSServer\Main.cpp(10,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
   TCPSServer.vcxproj -> C:\Users\shenw\Documents\Projects\TCPServer\TCPSServer\x64\Debug\TCPSServer.exe

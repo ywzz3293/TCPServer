@@ -3,8 +3,9 @@
 
 #pragma comment (lib, "ws2_32.lib")
 
-
 using namespace std;
+
+void showLastError();
 
 void main() {
 	//init winsocket
@@ -33,7 +34,11 @@ void main() {
 	hint.sin_port = htons(54000);
 	hint.sin_addr.S_un.S_addr = INADDR_ANY;	//could alsso ussse inet__pton...
 
-	bind(listening, (sockaddr*)&hint, sizeof(hint));
+	if (bind(listening, (sockaddr*)&hint, sizeof(hint)) == SOCKET_ERROR)
+	{
+		showLastError();
+		return;
+	}
 
 	//tell winsock the socket is for listening
 	listen(listening, SOMAXCONN);
@@ -87,7 +92,7 @@ void main() {
 
 
 		//echo message back to client
-		send(clientSocket, buf, byteRecevied + 1, 0);
+		send(clientSocket, buf, byteRecevied+1, 0);
 
 	}
 
@@ -99,4 +104,18 @@ void main() {
 	WSACleanup();
 
 
+}
+
+void showLastError()
+{
+	wchar_t* s = nullptr;
+
+	FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL,
+		WSAGetLastError(),
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		(LPWSTR)&s, 0, NULL);
+	fprintf(stderr, "%S\n", s);
+	LocalFree(s);
+	
 }
