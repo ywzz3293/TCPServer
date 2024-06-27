@@ -45,9 +45,9 @@ void main() {
 
 	//wait for connection
 	sockaddr_in client;
-	int clienSize = sizeof(client);
+	int clientSize = sizeof(client);
 
-	SOCKET clientSocket = accept(listening, (sockaddr*)&client, &clienSize);
+	SOCKET clientSocket = accept(listening, (sockaddr*)&client, &clientSize);
 	//if(clientSocket) error
 
 	char host[NI_MAXHOST]; //client's remote name
